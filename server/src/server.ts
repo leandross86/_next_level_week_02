@@ -1,6 +1,7 @@
-import express from 'express';
+import express, { json } from 'express';
 
 const app = express();
+app.use(express.json());
 
 // http://localhost:3333/users
 
@@ -10,13 +11,12 @@ const app = express();
 // PUT: Atualizar uma informação existente
 // DELETE: deletar uma informação existente
 
+// Corpo (Request body): Dados para criação ou atualização de um registro
+// Route Params: Identificar qual recursos eu quero atualizar ou deletar 
+// Query Params: Usado para paginação, filtros, ordenação (request.query)
 
-app.get('/users', (request, response) => {
-  const users = [
-    { Name: 'Diego', Age: 25 },
-    { Name: 'Leandro', Age: 33 },
-  ]
-  return response.json(users)
+app.post('/', (request, response) => {
+    return response.json({ mesage: "Hello world!"})
 })
 
 // localhost:3333
