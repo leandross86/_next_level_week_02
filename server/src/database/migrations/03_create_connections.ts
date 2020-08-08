@@ -5,7 +5,7 @@ export async function up(knex: Knex) {
     table.increments('id').primary();
     
 
-    table.integer('users_id')
+    table.integer('user_id')
       .notNullable()
       .references('id')
       .inTable('users')
@@ -13,7 +13,7 @@ export async function up(knex: Knex) {
       .onDelete('CASCADE');
 
     table.timestamp('created_at')
-      .defaultTo('now()')
+      .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
       .notNullable();
   })
 }
