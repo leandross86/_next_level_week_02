@@ -1,7 +1,9 @@
-import express, { json } from 'express';
+import express from 'express';
+import routes from './routes';
 
 const app = express();
 app.use(express.json());
+app.use(routes);
 
 // http://localhost:3333/users
 
@@ -15,9 +17,7 @@ app.use(express.json());
 // Route Params: Identificar qual recursos eu quero atualizar ou deletar 
 // Query Params: Usado para paginação, filtros, ordenação (request.query)
 
-app.post('/', (request, response) => {
-    return response.json({ mesage: "Hello world!"})
-})
+
 
 // localhost:3333
 app.listen(3333);
