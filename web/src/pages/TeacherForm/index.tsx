@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./styles.css";
 import PageHeader from "../../components/PageHeader";
@@ -9,6 +9,17 @@ import Select from "../../components/Select";
 import warningIcon from "../../assets/images/icons/warning.svg";
 
 export default function TeacherForm() {
+  const [scheduleItems, setScheduleItems] = useState([
+    { week_day: 0, from: '', to: '' }
+  ]);  
+
+  function addNewScheduleItem () {
+    setScheduleItems([
+      ...scheduleItems,
+      { week_day: 0, from: '', to: '' }
+    ]);
+  }
+
   return (
     <div className="container" id="page-teacher-form">
       <PageHeader
@@ -48,10 +59,14 @@ export default function TeacherForm() {
         <fieldset>
           <legend>
             Horários Disponiveis
-            <button type="button">+ Novo Horario</button>
+            <button type="button" onClick={addNewScheduleItem}>
+              + Novo Horario
+            </button>
           </legend>
 
-          <div className="schedule-item">
+          {scheduleItems.map(scheduleItem => {
+            return (
+              <div key={scheduleItem.week_day} className="schedule-item">
             <Select
               name="week_day"
               label="Dia da Semana"
@@ -68,6 +83,8 @@ export default function TeacherForm() {
             <Input name="from" label="Das" type="time" />
             <Input name="to" label="Até" type="time" />
           </div>
+            )
+          })}
         </fieldset>
 
         <footer>
